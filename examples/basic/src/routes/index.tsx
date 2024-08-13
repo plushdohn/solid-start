@@ -1,19 +1,20 @@
-import { Title } from "@solidjs/meta";
-import Counter from "~/components/Counter";
+import { action } from "@solidjs/router";
+
+const uploadFile = action(async (formData: FormData) => {
+  "use server";
+
+  const file = formData.get("file");
+
+  console.log(file);
+})
 
 export default function Home() {
   return (
     <main>
-      <Title>Hello World</Title>
-      <h1>Hello world!</h1>
-      <Counter />
-      <p>
-        Visit{" "}
-        <a href="https://start.solidjs.com" target="_blank">
-          start.solidjs.com
-        </a>{" "}
-        to learn how to build SolidStart apps.
-      </p>
+      <form action={uploadFile} method="post">
+        <input type="file" name="file" />
+        <button type="submit">Submit</button>
+      </form>
     </main>
   );
 }
